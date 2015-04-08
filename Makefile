@@ -6,15 +6,29 @@ CLI_CMD = ./workflow/awc
 
 default: build cli test
 
+ci: deps build cli coveralls
+
+release: clean build unlink link
+
 cli:
 	@echo "--> Running CLI commands"
 	@$(CLI_CMD) pos sta
-	@echo
 
 build:
 	@echo "--> Compiling packages and dependencies"
 	@mkdir -p ./workflow/
 	go build -ldflags '-s -w' -o $(CLI_CMD)
+
+coveralls:
+	@echo "--> Testing packages and sending coverage report"
+	@goveralls -v -service=travis-ci
+
+deps:
+	@echo "--> Installing build dependencies"
+	go get -d ./... $(DEPS)
+	go get github.com/axw/gocov/gocov
+	go get golang.org/x/tools/cmd/cover
+	go get github.com/mattn/goveralls
 
 test:
 	@echo "--> Testing packages"
@@ -33,6 +47,4 @@ unlink:
 	@- rm $(WORKFLOW_DIR)/$(BUNDLE_ID)
 	@- rm ./workflow/workflow
 
-release: clean build unlink link
-
-.PHONY: default cli build test clean link unlink release
+.PHONY: default ci release cli build coveralls deps test clean link unlink
