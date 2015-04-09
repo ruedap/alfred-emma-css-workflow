@@ -1,0 +1,20 @@
+{
+	"ImportPath": "github.com/ruedap/alfred-emma-css-workflow",
+	"GoVersion": "go1.4.2",
+	"Deps": [
+		{
+			"ImportPath": "github.com/ruedap/go-alfred",
+			"Comment": "0.1.0-4-gf5cdafd",
+			"Rev": "f5cdafd4f43c33aa097a6027d545113fd1f3757c"
+		},
+		{
+			"ImportPath": "github.com/ruedap/go-emma",
+			"Comment": "0.3.0.0",
+			"Rev": "44be0fd297c3e1855f94ece5cb9a30d191a8bbe5"
+		},
+		{
+			"ImportPath": "github.com/stretchr/testify/assert",
+			"Rev": "e4ec8152c15fc46bd5056ce65997a07c7d415325"
+		}
+	]
+}
