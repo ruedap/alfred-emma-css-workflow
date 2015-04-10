@@ -21,14 +21,14 @@ type CLI struct {
 func (c *CLI) Run(args []string) int {
 	str, err := find(args[1:])
 	if err != nil {
-		fmt.Fprintf(c.errStream, "Failed to find terms:", err)
+		fmt.Fprintf(c.outStream, errorXML(err))
 		return ExitCodeError
 	}
 
 	var decls []emma.Decl
 	err = json.Unmarshal([]byte(str), &decls)
 	if err != nil {
-		fmt.Fprintf(c.errStream, "Failed to parse JSON:", err)
+		fmt.Fprintf(c.outStream, errorXML(err))
 		return ExitCodeError
 	}
 
@@ -36,12 +36,18 @@ func (c *CLI) Run(args []string) int {
 
 	xml, err := res.ToXML()
 	if err != nil {
-		fmt.Fprintf(c.errStream, "Failed to convert XML:", err)
+		fmt.Fprintf(c.outStream, errorXML(err))
 		return ExitCodeError
 	}
 
 	fmt.Fprint(c.outStream, xml)
 	return ExitCodeOK
+}
+
+func errorXML(err error) string {
+	title := fmt.Sprintf("Error: %v", err.Error())
+	subtitle := "Emma.css Workflow Error"
+	return alfred.ErrorXML(title, subtitle, title)
 }
 
 func find(terms []string) (string, error) {
