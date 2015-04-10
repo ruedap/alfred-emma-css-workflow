@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"strings"
 	"testing"
 
@@ -44,6 +45,14 @@ func TestCLI_Run_NoResult(t *testing.T) {
 
 	expected := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<items></items>"
 	assert.Equal(t, outStream.String(), expected)
+}
+
+func TestCLI_errorXML(t *testing.T) {
+	err := errors.New("Foo")
+	actual := errorXML(err)
+
+	expected := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<items><item valid=\"false\" arg=\"Error: Foo\" uid=\"error\"><title>Error: Foo</title><subtitle>Emma.css Workflow Error</subtitle><icon>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns</icon></item></items>"
+	assert.Equal(t, actual, expected)
 }
 
 func TestCLI_find(t *testing.T) {
