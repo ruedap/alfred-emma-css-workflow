@@ -4,8 +4,8 @@
 	"Deps": [
 		{
 			"ImportPath": "github.com/ruedap/go-alfred",
-			"Comment": "0.1.0-4-gf5cdafd",
-			"Rev": "f5cdafd4f43c33aa097a6027d545113fd1f3757c"
+			"Comment": "0.1.0-5-g4e14fd6",
+			"Rev": "4e14fd6bf8ffa862936b56b36d13a278fc3881c6"
 		},
 		{
 			"ImportPath": "github.com/ruedap/go-emma",
