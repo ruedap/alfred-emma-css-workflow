@@ -36,7 +36,14 @@ func main() {
 
 	xml, err := resp.ToXML()
 	if err != nil {
-		// error handling
+		title := fmt.Sprintf("Error: %v", err.Error())
+		subtitle := "Foo Workflow Error"
+        arg := title
+		errXML := alfred.ErrorXML(title, subtitle, arg)
+		fmt.Println(errXML)
+		// <?xml version="1.0" encoding="UTF-8"?>
+		// <items><item valid="false" arg="Error: xxx" uid="error"><title>Error: xxx</title><subtitle>Foo Workflow Error</subtitle><icon>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns</icon></item></items>
+		return
 	}
 
 	fmt.Println(xml)
