@@ -9,7 +9,6 @@ ci: deps build cli coveralls
 
 release: clean build unlink link
 
-godep:
 cli:
 	@echo "--> Running CLI commands"
 	@$(CLI_CMD) pos sta
