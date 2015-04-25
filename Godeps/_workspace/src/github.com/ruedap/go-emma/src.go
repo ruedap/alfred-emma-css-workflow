@@ -1,6 +1,6 @@
 package emma
 
-// Emma.css 0.3.0
+// Emma.css 0.4.0
 const Src string = `
     ( pos-s       , position               , static ),
     ( pos-a       , position               , absolute ),

@@ -9,8 +9,8 @@
 		},
 		{
 			"ImportPath": "github.com/ruedap/go-emma",
-			"Comment": "0.3.0.0",
-			"Rev": "44be0fd297c3e1855f94ece5cb9a30d191a8bbe5"
+			"Comment": "0.4.0.0",
+			"Rev": "3f22bb8182163cb50d8e95585cf9342268d621b1"
 		},
 		{
 			"ImportPath": "github.com/stretchr/testify/assert",
