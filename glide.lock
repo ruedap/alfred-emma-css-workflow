@@ -1,0 +1,14 @@
+hash: cd3eb96ffc06c6b63b17562b0d440f213a33bf6ffcea83062de894ba783d62b4
+updated: 2017-06-04T02:42:41.838988212+09:00
+imports:
+- name: github.com/ruedap/go-alfred
+  version: f84353c003b57b7a559fbd26712470cb7d81c5e9
+- name: github.com/ruedap/go-emma
+  version: 693b271970c8c642164ea4642adfbe7898e6ef1b
+- name: github.com/stretchr/testify
+  version: e4ec8152c15fc46bd5056ce65997a07c7d415325
+  subpackages:
+  - assert
+- name: gopkg.in/yaml.v2
+  version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
+testImports: []

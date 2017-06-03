@@ -15,6 +15,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 	</dict>
@@ -25,12 +27,14 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Emma.css 0.4.0.0</string>
+	<string>Emma.css 0.10.0.0</string>
 	<key>objects</key>
 	<array>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
@@ -49,6 +53,10 @@
 				<string>...</string>
 				<key>script</key>
 				<string>./awc {query}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>subtext</key>
 				<string>Emma.css Workflow</string>
 				<key>title</key>
@@ -63,7 +71,7 @@
 			<key>uid</key>
 			<string>21557827-8003-42B7-A042-16D4C9278FEC</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -72,13 +80,15 @@
 				<true/>
 				<key>clipboardtext</key>
 				<string>{query}</string>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
 			<string>8CBC1CA3-D946-4766-9551-505842A4BE52</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -87,11 +97,15 @@
 	<dict>
 		<key>21557827-8003-42B7-A042-16D4C9278FEC</key>
 		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
 			<key>ypos</key>
 			<real>120</real>
 		</dict>
 		<key>8CBC1CA3-D946-4766-9551-505842A4BE52</key>
 		<dict>
+			<key>xpos</key>
+			<integer>700</integer>
 			<key>ypos</key>
 			<real>120</real>
 		</dict>
