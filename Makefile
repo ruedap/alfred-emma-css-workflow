@@ -5,7 +5,7 @@ CLI_CMD = ./workflow/awc
 
 default: build cli test
 
-ci: deps build cli coveralls
+ci: build cli coveralls
 
 release: clean build unlink link
 
