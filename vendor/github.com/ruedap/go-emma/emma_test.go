@@ -8,28 +8,22 @@ import (
 
 func TestEmma_NewEmma(t *testing.T) {
 	actual := NewEmma()
-	assert.Equal(t, len(actual.decls), 522)
-	assert.Equal(t, len(actual.result), 0)
+	assert.Equal(t, 714, len(actual.decls))
+	assert.Equal(t, 0, len(actual.result))
 }
 
 func TestEmma_Find(t *testing.T) {
-	src := `
-    ( pos-s       , position               , static ),
-    ( pos-a       , position               , absolute ),
-    ( pos-r       , position               , relative ),
-    ( pos-f       , position               , fixed ),
-`
-	terms := []string{"position"}
 	e := NewEmma()
-	e.setSrc(src)
+	terms := []string{"font-smoothing"}
 	actual := e.Find(terms).result
 	expected := []Decl{
-		{"pos-s", "position", "static"},
-		{"pos-a", "position", "absolute"},
-		{"pos-r", "position", "relative"},
-		{"pos-f", "position", "fixed"},
+		{"wkfsm-a", "-webkit-font-smoothing", "antialiased"},
+		{"wkfsm-sa", "-webkit-font-smoothing", "subpixel-antialiased"},
+		{"wkfsm-n", "-webkit-font-smoothing", "none"},
+		{"mzfsm-g", "-moz-osx-font-smoothing", "grayscale"},
+		{"mzfsm-u", "-moz-osx-font-smoothing", "unset"},
 	}
-	assert.Equal(t, actual, expected)
+	assert.Equal(t, expected, actual)
 }
 
 func TestEmma_ToCSS(t *testing.T) {
@@ -41,13 +35,13 @@ func TestEmma_ToCSS(t *testing.T) {
 	e.result = decls
 	actual := e.ToCSS()
 	expected := ".u-pos-s { position: static; }\n.u-pos-a { position: absolute; }\n"
-	assert.Equal(t, actual, expected)
+	assert.Equal(t, expected, actual)
 
 	decls = []Decl{{"ff-t", "font-family", `"Times New Roman", Times, Baskerville, Georgia, serif`}}
 	e.result = decls
 	actual = e.ToCSS()
 	expected = ".u-ff-t { font-family: \"Times New Roman\", Times, Baskerville, Georgia, serif; }\n"
-	assert.Equal(t, actual, expected)
+	assert.Equal(t, expected, actual)
 }
 
 func TestEmma_ToJSON(t *testing.T) {
@@ -62,7 +56,7 @@ func TestEmma_ToJSON(t *testing.T) {
 	assert.Nil(t, err)
 
 	expected := "[{\"snippet\":\"pos-s\",\"property\":\"position\",\"value\":\"static\"},{\"snippet\":\"pos-a\",\"property\":\"position\",\"value\":\"absolute\"}]"
-	assert.Equal(t, actual, expected)
+	assert.Equal(t, expected, actual)
 }
 
 func TestEmma_ToJSON_Zero(t *testing.T) {
@@ -74,13 +68,24 @@ func TestEmma_ToJSON_Zero(t *testing.T) {
 	assert.Nil(t, err)
 
 	expected := "[]"
-	assert.Equal(t, actual, expected)
+	assert.Equal(t, expected, actual)
 }
 
 func TestEmma_parse(t *testing.T) {
 	src := `
-    ( pos-s       , position               , static ),
-    ( pos-a       , position               , absolute ),
+rules:
+  props:
+    -
+      name: position
+      abbr: pos
+      group: display
+      values:
+        -
+          name: static
+          abbr: s
+        -
+          name: relative
+          abbr: r
 `
 
 	e := NewEmma()
@@ -95,37 +100,28 @@ func TestEmma_parse(t *testing.T) {
 			Value:    "static",
 		},
 		{
-			Snippet:  "pos-a",
+			Snippet:  "pos-r",
 			Property: "position",
-			Value:    "absolute",
+			Value:    "relative",
 		},
 	}
-	assert.Equal(t, actual, expected)
-}
-
-func TestEmma_parse_Comment(t *testing.T) {
-	src := `
-    ( ti--9999    , text-indent            , -9999px ),             // Emmet: ti-
-`
-	e := NewEmma()
-	e.setSrc(src)
-	actual, err := e.parse()
-	assert.Nil(t, err)
-
-	expected := []Decl{
-		{
-			Snippet:  "ti--9999",
-			Property: "text-indent",
-			Value:    "-9999px",
-		},
-	}
-	assert.Equal(t, actual, expected)
+	assert.Equal(t, expected, actual)
 }
 
 func TestEmma_parse_FontFamily(t *testing.T) {
 	src := `
-    ( ff-t        , font-family            , '"Times New Roman", Times, Baskerville, Georgia, serif' ),
+rules:
+  props:
+    -
+      name: font-family
+      abbr: ff
+      group: text
+      values:
+        -
+          name: '"Times New Roman", Times, Baskerville, Georgia, serif'
+          abbr: t
 `
+
 	e := NewEmma()
 	e.setSrc(src)
 	actual, err := e.parse()
@@ -138,7 +134,7 @@ func TestEmma_parse_FontFamily(t *testing.T) {
 			Value:    `"Times New Roman", Times, Baskerville, Georgia, serif`,
 		},
 	}
-	assert.Equal(t, actual, expected)
+	assert.Equal(t, expected, actual)
 }
 
 func TestEmma_parse_Blank(t *testing.T) {
@@ -148,7 +144,7 @@ func TestEmma_parse_Blank(t *testing.T) {
 	assert.NotNil(t, err)
 
 	expected := []Decl{}
-	assert.Equal(t, actual, expected)
+	assert.Equal(t, expected, actual)
 }
 
 func TestEmma_contains_True(t *testing.T) {

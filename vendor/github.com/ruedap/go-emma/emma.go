@@ -4,9 +4,40 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"regexp"
+	"log"
 	"strings"
+
+	yaml "gopkg.in/yaml.v2"
 )
+
+type TEmmaDoc struct {
+	Ver  string `yaml:"ver"`
+	Vars []struct {
+		Name  string `yaml:"name"`
+		Value string `yaml:"value"`
+	} `yaml:"vars"`
+	Rules struct {
+		Props []struct {
+			Name   string `yaml:"name"`
+			Abbr   string `yaml:"abbr"`
+			Group  string `yaml:"group"`
+			Values []struct {
+				Name string `yaml:"name"`
+				Abbr string `yaml:"abbr"`
+			} `yaml:"values"`
+		} `yaml:"props"`
+		Mixins []struct {
+			Name  string `yaml:"name"`
+			Abbr  string `yaml:"abbr"`
+			Desc  string `yaml:"desc"`
+			Group string `yaml:"group"`
+			Decls []struct {
+				Prop  string `yaml:"prop"`
+				Value string `yaml:"value"`
+			} `yaml:"decls"`
+		} `yaml:"mixins"`
+	} `yaml:"rules"`
+}
 
 type Emma struct {
 	src    string
@@ -23,7 +54,8 @@ type Decl struct {
 
 func NewEmma() *Emma {
 	e := new(Emma)
-	e.setSrc(Src)
+	data := FSMustString(false, "/data/emma-data.yml")
+	e.setSrc(data)
 	e.result = []Decl{}
 
 	return e
@@ -60,37 +92,33 @@ func (e *Emma) ToJSON() (string, error) {
 }
 
 func (e *Emma) parse() ([]Decl, error) {
-	re := regexp.MustCompile(`\s+\((.+?)\,(.+?)\,(.+)\)\,.*`)
-	res := re.FindAllStringSubmatch(e.src, -1)
-	var dec Decl
-	var ret []Decl
+	t := TEmmaDoc{}
+	err := yaml.Unmarshal([]byte(e.src), &t)
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
 
-	if len(res) < 1 {
+	var dec Decl
+	var result []Decl
+
+	props := t.Rules.Props
+
+	if len(props) < 1 {
 		return []Decl{}, errors.New("failed to parse source file")
 	}
 
-	for _, sl := range res {
-		if len(sl) != 4 {
-			continue
+	for _, prop := range props {
+		for _, value := range prop.Values {
+			dec = Decl{
+				Snippet:  prop.Abbr + "-" + value.Abbr,
+				Property: prop.Name,
+				Value:    value.Name,
+			}
+			result = append(result, dec)
 		}
-
-		s := strings.TrimSpace(sl[3])
-		switch {
-		case s[0] == `'`[0] && s[len(s)-1] == `'`[0]:
-			s = strings.Trim(s, `'`)
-		case s[0] == `"`[0] && s[len(s)-1] == `"`[0]:
-			s = strings.Trim(s, `"`)
-		}
-
-		dec = Decl{
-			Snippet:  strings.TrimSpace(sl[1]),
-			Property: strings.TrimSpace(sl[2]),
-			Value:    s,
-		}
-		ret = append(ret, dec)
 	}
 
-	return ret, nil
+	return result, nil
 }
 
 func (e *Emma) setSrc(src string) *Emma {
