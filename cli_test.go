@@ -19,19 +19,20 @@ func TestCLI_Run(t *testing.T) {
 	status := cli.Run(args)
 	assert.Equal(t, status, ExitCodeOK)
 
-	expected := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<items><item valid=\"true\" arg=\"u-ml-0\" uid=\"ml-0\"><title>.u-ml-0 { margin-left: 0; }</title><subtitle>Paste class name: u-ml-0</subtitle><icon>icon.png</icon></item></items>"
+	expected := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<items><item valid=\"true\" arg=\"ml0\" uid=\"ml0\"><title>.ml0 { margin-left: 0; }</title><subtitle>Paste class name: ml0</subtitle><icon>icon.png</icon></item></items>"
 	assert.Equal(t, outStream.String(), expected)
 }
 
 func TestCLI_Run_MinusArgs(t *testing.T) {
 	outStream, errStream := new(bytes.Buffer), new(bytes.Buffer)
 	cli := &CLI{outStream: outStream, errStream: errStream}
-	args := strings.Split("./awc --", " ")
+	args := strings.Split("./awc -1", " ")
 
 	status := cli.Run(args)
 	assert.Equal(t, status, ExitCodeOK)
 
-	expected := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<items><item valid=\"true\" arg=\"u-ti--9999\" uid=\"ti--9999\"><title>.u-ti--9999 { text-indent: -9999px; }</title><subtitle>Paste class name: u-ti--9999</subtitle><icon>icon.png</icon></item><item valid=\"true\" arg=\"u-ord--1\" uid=\"ord--1\"><title>.u-ord--1 { order: -1; }</title><subtitle>Paste class name: u-ord--1</subtitle><icon>icon.png</icon></item></items>"
+	expected := `<?xml version="1.0" encoding="UTF-8"?>
+<items><item valid="true" arg="ord-1" uid="ord-1"><title>.ord-1 { order: -1; }</title><subtitle>Paste class name: ord-1</subtitle><icon>icon.png</icon></item><item valid="true" arg="fx0-1-a" uid="fx0-1-a"><title>.fx0-1-a { flex: 0 1 auto; }</title><subtitle>Paste class name: fx0-1-a</subtitle><icon>icon.png</icon></item><item valid="true" arg="fx1-1-a" uid="fx1-1-a"><title>.fx1-1-a { flex: 1 1 auto; }</title><subtitle>Paste class name: fx1-1-a</subtitle><icon>icon.png</icon></item></items>`
 	assert.Equal(t, outStream.String(), expected)
 }
 
