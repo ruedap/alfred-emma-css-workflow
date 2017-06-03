@@ -8,8 +8,8 @@ install:
   - go get -v github.com/Masterminds/glide
   - cd $GOPATH/src/github.com/Masterminds/glide && git checkout tags/0.10.2 && go install && cd -
   - glide install
-	- go get github.com/axw/gocov/gocov
-	- go get golang.org/x/tools/cmd/cover
-	- go get github.com/mattn/goveralls
+  - go get github.com/axw/gocov/gocov
+  - go get golang.org/x/tools/cmd/cover
+  - go get github.com/mattn/goveralls
 script:
   - make ci
