@@ -76,16 +76,28 @@ func TestEmma_parse(t *testing.T) {
 rules:
   props:
     -
-      name: position
-      abbr: pos
-      group: display
+      name: width
+      abbr: w
+      group: width
       values:
         -
-          name: static
-          abbr: s
+          name: auto
+          abbr: a
         -
-          name: relative
-          abbr: r
+          name: '0'
+          abbr: '0'
+        -
+          name: 1px
+          abbr: '1'
+        -
+          name: 1%
+          abbr: 1p
+        -
+          name: 100%
+          abbr: 100p
+        -
+          name: 25vw
+          abbr: 25vw
 `
 
 	e := NewEmma()
@@ -95,14 +107,34 @@ rules:
 
 	expected := []Decl{
 		{
-			Snippet:  "pos-s",
-			Property: "position",
-			Value:    "static",
+			Snippet:  "w-a",
+			Property: "width",
+			Value:    "auto",
 		},
 		{
-			Snippet:  "pos-r",
-			Property: "position",
-			Value:    "relative",
+			Snippet:  "w0",
+			Property: "width",
+			Value:    "0",
+		},
+		{
+			Snippet:  "w1",
+			Property: "width",
+			Value:    "1px",
+		},
+		{
+			Snippet:  "w1p",
+			Property: "width",
+			Value:    "1%",
+		},
+		{
+			Snippet:  "w100p",
+			Property: "width",
+			Value:    "100%",
+		},
+		{
+			Snippet:  "w25vw",
+			Property: "width",
+			Value:    "25vw",
 		},
 	}
 	assert.Equal(t, expected, actual)
@@ -193,4 +225,24 @@ func TestEmma_containsDecl_False(t *testing.T) {
 
 	actual = containsDecl(d, "ss")
 	assert.False(t, actual)
+}
+
+func TestEmma_isNumeric_True(t *testing.T) {
+	assert.True(t, isNumeric("0"))
+	assert.True(t, isNumeric("10px"))
+	assert.True(t, isNumeric("-3"))
+}
+
+func TestEmma_isNumeric_False(t *testing.T) {
+	assert.False(t, isNumeric("a1"))
+	assert.False(t, isNumeric("b-"))
+	assert.False(t, isNumeric("-moz"))
+}
+
+func TestEmma_generateAbbr(t *testing.T) {
+	assert.Equal(t, "w-a", generateAbbr("w", "a"))
+	assert.Equal(t, "w0", generateAbbr("w", "0"))
+	assert.Equal(t, "w1", generateAbbr("w", "1"))
+	assert.Equal(t, "w25vw", generateAbbr("w", "25vw"))
+	assert.Equal(t, "ti-9999", generateAbbr("ti", "-9999"))
 }

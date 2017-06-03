@@ -3,7 +3,7 @@ import:
 - package: github.com/ruedap/go-alfred
   version: f84353c003b57b7a559fbd26712470cb7d81c5e9
 - package: github.com/ruedap/go-emma
-  version: 0.10.0.0
+  version: 0.10.0.1
 - package: github.com/stretchr/testify
   version: e4ec8152c15fc46bd5056ce65997a07c7d415325
   subpackages:
