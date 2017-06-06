@@ -60,7 +60,7 @@ func response(decls []emma.Decl) *alfred.Response {
 	var arg, title, subtitle string
 	for _, d := range decls {
 		arg = fmt.Sprintf("%v", d.Snippet)
-		title = fmt.Sprintf(".%v { %v: %v; }", d.Snippet, d.Property, d.Value)
+		title = fmt.Sprintf("%v { %v: %v; }", d.Snippet, d.Property, d.Value)
 		subtitle = fmt.Sprintf("Paste class name: %v", d.Snippet)
 		ri := alfred.ResponseItem{
 			Valid:    true,

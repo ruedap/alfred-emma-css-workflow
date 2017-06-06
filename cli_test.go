@@ -19,7 +19,7 @@ func TestCLI_Run(t *testing.T) {
 	status := cli.Run(args)
 	assert.Equal(t, status, ExitCodeOK)
 
-	expected := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<items><item valid=\"true\" arg=\"ml0\" uid=\"ml0\"><title>.ml0 { margin-left: 0; }</title><subtitle>Paste class name: ml0</subtitle><icon>icon.png</icon></item></items>"
+	expected := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<items><item valid=\"true\" arg=\"ml0\" uid=\"ml0\"><title>ml0 { margin-left: 0; }</title><subtitle>Paste class name: ml0</subtitle><icon>icon.png</icon></item><item valid=\"true\" arg=\"mx0\" uid=\"mx0\"><title>mx0 { margin-left: 0; }</title><subtitle>Paste class name: mx0</subtitle><icon>icon.png</icon></item><item valid=\"true\" arg=\"@include emma-mx0;\" uid=\"@include emma-mx0;\"><title>@include emma-mx0; { margin-left: 0; }</title><subtitle>Paste class name: @include emma-mx0;</subtitle><icon>icon.png</icon></item></items>"
 	assert.Equal(t, outStream.String(), expected)
 }
 
@@ -31,8 +31,7 @@ func TestCLI_Run_MinusArgs(t *testing.T) {
 	status := cli.Run(args)
 	assert.Equal(t, status, ExitCodeOK)
 
-	expected := `<?xml version="1.0" encoding="UTF-8"?>
-<items><item valid="true" arg="ord-1" uid="ord-1"><title>.ord-1 { order: -1; }</title><subtitle>Paste class name: ord-1</subtitle><icon>icon.png</icon></item><item valid="true" arg="fx0-1-a" uid="fx0-1-a"><title>.fx0-1-a { flex: 0 1 auto; }</title><subtitle>Paste class name: fx0-1-a</subtitle><icon>icon.png</icon></item><item valid="true" arg="fx1-1-a" uid="fx1-1-a"><title>.fx1-1-a { flex: 1 1 auto; }</title><subtitle>Paste class name: fx1-1-a</subtitle><icon>icon.png</icon></item></items>`
+	expected := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<items><item valid=\"true\" arg=\"ord-1\" uid=\"ord-1\"><title>ord-1 { order: -1; }</title><subtitle>Paste class name: ord-1</subtitle><icon>icon.png</icon></item><item valid=\"true\" arg=\"fx0-1-a\" uid=\"fx0-1-a\"><title>fx0-1-a { flex: 0 1 auto; }</title><subtitle>Paste class name: fx0-1-a</subtitle><icon>icon.png</icon></item><item valid=\"true\" arg=\"fx1-1-a\" uid=\"fx1-1-a\"><title>fx1-1-a { flex: 1 1 auto; }</title><subtitle>Paste class name: fx1-1-a</subtitle><icon>icon.png</icon></item></items>"
 	assert.Equal(t, outStream.String(), expected)
 }
 
