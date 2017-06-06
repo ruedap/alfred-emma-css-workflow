@@ -3,11 +3,11 @@ WORKFLOW_DIR = ~/Dropbox/Alfred/Alfred.alfredpreferences/workflows
 BUNDLE_ID = com.ruedap.emma-css
 CLI_CMD = ./workflow/awc
 
-default: build upx cli test
+default: build cli test
 
 ci: build cli coveralls
 
-release: clean build upx unlink link
+release: clean build unlink link
 
 cli:
 	@echo "--> Running CLI commands"
@@ -16,10 +16,7 @@ cli:
 build:
 	@echo "--> Compiling packages and dependencies"
 	@mkdir -p ./workflow/
-	go build -ldflags '-w -s' -o $(CLI_CMD)
-
-upx:
-	upx -5 $(CLI_CMD)
+	go build -ldflags '-s -w' -o $(CLI_CMD)
 
 coveralls:
 	@echo "--> Testing packages and sending coverage report"
