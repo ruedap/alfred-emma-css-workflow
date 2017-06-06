@@ -190,10 +190,10 @@ func FSMustString(useLocal bool, name string) string {
 
 var _escData = map[string]*_escFile{
 
-	"/data/emma-data.yml": {
-		local:   "data/emma-data.yml",
+	"/assets/emma-data.yml": {
+		local:   "assets/emma-data.yml",
 		size:    56763,
-		modtime: 1496493163,
+		modtime: 1496593367,
 		compressed: `
 H4sIAAAAAAAA/+xdX2/kOHJ/308hzMylL8DIkPqP7fY+XfZhAyRZBJdLgHsaUBLVzTElaimq3XaQ7x60
 +p9IFktSy2307KmfbII/kVVFsn4ki+SGyidvEtyFwV04+WlDZPn0k+f5P3me5+Uko09eIWnKtnXChvCK
@@ -292,8 +292,8 @@ Njm8kn/DqFRn/4ZxKYsiFjZFvI5/6yJau3+DZNM3V4F93WNMS2YurvXZK4D3tO26QtvK9tc8x9aw/b3z
 		local: "",
 	},
 
-	"/data": {
+	"/assets": {
 		isDir: true,
-		local: "data",
+		local: "assets",
 	},
 }

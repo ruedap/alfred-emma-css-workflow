@@ -11,33 +11,45 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
+type TEmmaDocVar struct {
+	Name  string `yaml:"name"`
+	Value string `yaml:"value"`
+}
+
+type TEmmaDocProp struct {
+	Name   string `yaml:"name"`
+	Abbr   string `yaml:"abbr"`
+	Group  string `yaml:"group"`
+	Values []TEmmaDocPropValue
+}
+
+type TEmmaDocPropValue struct {
+	Name string `yaml:"name"`
+	Abbr string `yaml:"abbr"`
+}
+
+type TEmmaDocMixin struct {
+	Name  string `yaml:"name"`
+	Abbr  string `yaml:"abbr"`
+	Desc  string `yaml:"desc"`
+	Group string `yaml:"group"`
+	Decls []TEmmaDocMixinDecl
+}
+
+type TEmmaDocMixinDecl struct {
+	Prop  string `yaml:"prop"`
+	Value string `yaml:"value"`
+}
+
+type TEmmaDocRule struct {
+	Props  []TEmmaDocProp
+	Mixins []TEmmaDocMixin
+}
+
 type TEmmaDoc struct {
-	Ver  string `yaml:"ver"`
-	Vars []struct {
-		Name  string `yaml:"name"`
-		Value string `yaml:"value"`
-	} `yaml:"vars"`
-	Rules struct {
-		Props []struct {
-			Name   string `yaml:"name"`
-			Abbr   string `yaml:"abbr"`
-			Group  string `yaml:"group"`
-			Values []struct {
-				Name string `yaml:"name"`
-				Abbr string `yaml:"abbr"`
-			} `yaml:"values"`
-		} `yaml:"props"`
-		Mixins []struct {
-			Name  string `yaml:"name"`
-			Abbr  string `yaml:"abbr"`
-			Desc  string `yaml:"desc"`
-			Group string `yaml:"group"`
-			Decls []struct {
-				Prop  string `yaml:"prop"`
-				Value string `yaml:"value"`
-			} `yaml:"decls"`
-		} `yaml:"mixins"`
-	} `yaml:"rules"`
+	Ver   string `yaml:"ver"`
+	Vars  []TEmmaDocVar
+	Rules TEmmaDocRule
 }
 
 type Emma struct {
@@ -55,7 +67,7 @@ type Decl struct {
 
 func NewEmma() *Emma {
 	e := new(Emma)
-	data := FSMustString(false, "/data/emma-data.yml")
+	data := FSMustString(false, "/assets/emma-data.yml")
 	e.setSrc(data)
 	e.result = []Decl{}
 
@@ -93,16 +105,29 @@ func (e *Emma) ToJSON() (string, error) {
 }
 
 func (e *Emma) parse() ([]Decl, error) {
-	t := TEmmaDoc{}
-	err := yaml.Unmarshal([]byte(e.src), &t)
+	doc := TEmmaDoc{}
+	err := yaml.Unmarshal([]byte(e.src), &doc)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
 
-	var dec Decl
-	var result []Decl
+	var resultProps []Decl
+	resultProps, err = parseProps(doc.Rules.Props)
+	if err != nil {
+		return []Decl{}, errors.New("failed to parse source file")
+	}
 
-	props := t.Rules.Props
+	var resultMixins []Decl
+	resultMixins, err = parseMixins(doc.Rules.Mixins)
+	if err != nil {
+		return []Decl{}, errors.New("failed to parse source file")
+	}
+
+	return append(resultProps, resultMixins...), nil
+}
+
+func parseProps(props []TEmmaDocProp) ([]Decl, error) {
+	var result []Decl
 
 	if len(props) < 1 {
 		return []Decl{}, errors.New("failed to parse source file")
@@ -110,12 +135,36 @@ func (e *Emma) parse() ([]Decl, error) {
 
 	for _, prop := range props {
 		for _, value := range prop.Values {
-			dec = Decl{
+			result = append(result, Decl{
 				Snippet:  generateAbbr(prop.Abbr, value.Abbr),
 				Property: prop.Name,
 				Value:    value.Name,
-			}
-			result = append(result, dec)
+			})
+		}
+	}
+
+	return result, nil
+}
+
+func parseMixins(mixins []TEmmaDocMixin) ([]Decl, error) {
+	var result []Decl
+
+	if len(mixins) < 1 {
+		return []Decl{}, errors.New("failed to parse source file")
+	}
+
+	for _, mixin := range mixins {
+		for _, decl := range mixin.Decls {
+			result = append(result, Decl{
+				Snippet:  mixin.Abbr,
+				Property: decl.Prop,
+				Value:    decl.Value,
+			})
+			result = append(result, Decl{
+				Snippet:  "@include emma-" + mixin.Abbr + ";",
+				Property: decl.Prop,
+				Value:    decl.Value,
+			})
 		}
 	}
 

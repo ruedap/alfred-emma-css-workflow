@@ -4,10 +4,11 @@ go:
   - 1.8.x
   - 1.7.x
   - 1.6.x
+before_install:
+  - mkdir -p $GOPATH/bin
 install:
-  - go get -v github.com/Masterminds/glide
-  - cd $GOPATH/src/github.com/Masterminds/glide && git checkout tags/0.10.2 && go install && cd -
-  - glide install
+  - make deps
 script:
-  - go build cmd/emma/main.go
-  - go test -v $(glide novendor)
+  - make
+  - make install
+  - make test

@@ -8,7 +8,7 @@ import (
 
 func TestEmma_NewEmma(t *testing.T) {
 	actual := NewEmma()
-	assert.Equal(t, 714, len(actual.decls))
+	assert.Equal(t, 856, len(actual.decls))
 	assert.Equal(t, 0, len(actual.result))
 }
 
@@ -22,6 +22,10 @@ func TestEmma_Find(t *testing.T) {
 		{"wkfsm-n", "-webkit-font-smoothing", "none"},
 		{"mzfsm-g", "-moz-osx-font-smoothing", "grayscale"},
 		{"mzfsm-u", "-moz-osx-font-smoothing", "unset"},
+		{"fsm-a", "-webkit-font-smoothing", "antialiased"},
+		{"@include emma-fsm-a;", "-webkit-font-smoothing", "antialiased"},
+		{"fsm-a", "-moz-osx-font-smoothing", "grayscale"},
+		{"@include emma-fsm-a;", "-moz-osx-font-smoothing", "grayscale"},
 	}
 	assert.Equal(t, expected, actual)
 }
@@ -98,6 +102,28 @@ rules:
         -
           name: 25vw
           abbr: 25vw
+  mixins:
+    -
+      name: clearfix
+      abbr: cf
+      desc: 'Clearfix (Contain floats)'
+      group: float
+      decls:
+        -
+          prop: ''
+          value: '&::after { content: ""; display: table; clear: both; }'
+    -
+      name: text-truncation
+      abbr: tetr
+      desc: 'Text truncation (ellipsis)'
+      group: text
+      decls:
+        -
+          prop: max-width
+          value: 100%
+        -
+          prop: overflow
+          value: hidden
 `
 
 	e := NewEmma()
@@ -136,34 +162,35 @@ rules:
 			Property: "width",
 			Value:    "25vw",
 		},
-	}
-	assert.Equal(t, expected, actual)
-}
-
-func TestEmma_parse_FontFamily(t *testing.T) {
-	src := `
-rules:
-  props:
-    -
-      name: font-family
-      abbr: ff
-      group: text
-      values:
-        -
-          name: '"Times New Roman", Times, Baskerville, Georgia, serif'
-          abbr: t
-`
-
-	e := NewEmma()
-	e.setSrc(src)
-	actual, err := e.parse()
-	assert.Nil(t, err)
-
-	expected := []Decl{
 		{
-			Snippet:  "ff-t",
-			Property: "font-family",
-			Value:    `"Times New Roman", Times, Baskerville, Georgia, serif`,
+			Snippet:  "cf",
+			Property: "",
+			Value:    "&::after { content: \"\"; display: table; clear: both; }",
+		},
+		{
+			Snippet:  "@include emma-cf;",
+			Property: "",
+			Value:    "&::after { content: \"\"; display: table; clear: both; }",
+		},
+		{
+			Snippet:  "tetr",
+			Property: "max-width",
+			Value:    "100%",
+		},
+		{
+			Snippet:  "@include emma-tetr;",
+			Property: "max-width",
+			Value:    "100%",
+		},
+		{
+			Snippet:  "tetr",
+			Property: "overflow",
+			Value:    "hidden",
+		},
+		{
+			Snippet:  "@include emma-tetr;",
+			Property: "overflow",
+			Value:    "hidden",
 		},
 	}
 	assert.Equal(t, expected, actual)
@@ -176,6 +203,91 @@ func TestEmma_parse_Blank(t *testing.T) {
 	assert.NotNil(t, err)
 
 	expected := []Decl{}
+	assert.Equal(t, expected, actual)
+}
+
+func TestEmma_parseProps(t *testing.T) {
+	props := []TEmmaDocProp{
+		{
+			Name:  "top",
+			Abbr:  "t",
+			Group: "display",
+			Values: []TEmmaDocPropValue{
+				{
+					Name: "auto",
+					Abbr: "a",
+				},
+				{
+					Name: "0",
+					Abbr: "0",
+				},
+			},
+		},
+	}
+
+	actual, err := parseProps(props)
+	assert.Nil(t, err)
+
+	expected := []Decl{
+		{
+			Snippet:  "t-a",
+			Property: "top",
+			Value:    "auto",
+		},
+		{
+			Snippet:  "t0",
+			Property: "top",
+			Value:    "0",
+		},
+	}
+	assert.Equal(t, expected, actual)
+}
+
+func TestEmma_parseMixins(t *testing.T) {
+	mixins := []TEmmaDocMixin{
+		{
+			Name:  "text-hiding",
+			Abbr:  "tehi",
+			Desc:  "Text hiding",
+			Group: "text",
+			Decls: []TEmmaDocMixinDecl{
+				{
+					Prop:  "overflow",
+					Value: "hidden",
+				},
+				{
+					Prop:  "text-indent",
+					Value: "200%",
+				},
+			},
+		},
+	}
+
+	actual, err := parseMixins(mixins)
+	assert.Nil(t, err)
+
+	expected := []Decl{
+		{
+			Snippet:  "tehi",
+			Property: "overflow",
+			Value:    "hidden",
+		},
+		{
+			Snippet:  "@include emma-tehi;",
+			Property: "overflow",
+			Value:    "hidden",
+		},
+		{
+			Snippet:  "tehi",
+			Property: "text-indent",
+			Value:    "200%",
+		},
+		{
+			Snippet:  "@include emma-tehi;",
+			Property: "text-indent",
+			Value:    "200%",
+		},
+	}
 	assert.Equal(t, expected, actual)
 }
 
