@@ -2,7 +2,7 @@
 
 You can incremental search for [Emma.css](https://github.com/ruedap/emma.css) and paste it to front most app.
 
-![](assets/cap.png)
+![](http://ruedap.github.io/alfred-emma-css-workflow/assets/cap.png)
 
 
 ## Installation
