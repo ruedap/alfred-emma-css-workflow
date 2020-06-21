@@ -3,7 +3,7 @@ type TItem = Readonly<{
   uid?: string;
   title: string;
   subtitle: string;
-  arg: string; // recommended
+  arg?: string; // recommended
   icon: {
     type: "fileicon" | "filetype";
     path: string;
