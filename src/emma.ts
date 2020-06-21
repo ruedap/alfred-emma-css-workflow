@@ -6,7 +6,7 @@ type TVar = Readonly<{
   value: string;
 }>;
 
-type TProp = Readonly<{
+export type TProp = Readonly<{
   name: string;
   abbr: string;
   group: string;

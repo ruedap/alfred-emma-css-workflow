@@ -1,12 +1,21 @@
-// @deno-types="https://deno.land/x/fuse@v6.0.4/dist/fuse.d.ts"
-import Fuse from "https://deno.land/x/fuse@v6.0.4/dist/fuse.esm.min.js";
+// @deno-types="https://github.com/krisk/Fuse/raw/v6.2.1/dist/fuse.d.ts"
+import Fuse from "https://github.com/krisk/Fuse/raw/v6.2.1/dist/fuse.esm.js";
+import { TProp } from "./emma.ts";
 
-export const search = (list: any, keys: string[], query: string) => {
-  const fuse = new Fuse(list, {
+type TSearchResult = Readonly<{
+  item: TProp;
+  refIndex: number;
+  score: number;
+}>;
+
+export const search = (list: TProp[], keys: string[], query: string) => {
+  const options = {
     includeScore: true,
     useExtendedSearch: true,
     keys: keys,
-  }, undefined);
+  } as const;
 
-  return fuse.search(query);
+  const fuse = new Fuse(list, options, undefined);
+
+  return fuse.search(query) as TSearchResult[];
 };
