@@ -1,6 +1,6 @@
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 import { search } from "./search.ts";
-import { dummyList1 } from "./emma_test.ts";
+import { dummyList1 } from "./emma.test.ts";
 
 Deno.test("search", () => {
   const actual = search(dummyList1, ["name", "values.name"], "auto");

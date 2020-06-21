@@ -1,5 +1,5 @@
 run:
-	./deno run --allow-read ./src/index.ts $(args)
+	./deno run --allow-read ./src/mod.ts $(args)
 
 test:
 	./deno test
