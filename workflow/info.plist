@@ -27,7 +27,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Emma.css 0.10.0.2</string>
+	<string>Emma.css 0.10.0.deno</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -35,6 +35,12 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
@@ -52,7 +58,7 @@
 				<key>runningsubtext</key>
 				<string>...</string>
 				<key>script</key>
-				<string>./awc {query}</string>
+				<string>./deno run --allow-read ./src/mod.ts {query}</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -71,7 +77,7 @@
 			<key>uid</key>
 			<string>21557827-8003-42B7-A042-16D4C9278FEC</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -88,7 +94,7 @@
 			<key>uid</key>
 			<string>8CBC1CA3-D946-4766-9551-505842A4BE52</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -98,16 +104,16 @@
 		<key>21557827-8003-42B7-A042-16D4C9278FEC</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>150</integer>
 			<key>ypos</key>
-			<real>120</real>
+			<integer>130</integer>
 		</dict>
 		<key>8CBC1CA3-D946-4766-9551-505842A4BE52</key>
 		<dict>
 			<key>xpos</key>
-			<integer>700</integer>
+			<integer>600</integer>
 			<key>ypos</key>
-			<real>120</real>
+			<integer>130</integer>
 		</dict>
 	</dict>
 	<key>webaddress</key>
