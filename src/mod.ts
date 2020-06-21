@@ -1,4 +1,4 @@
-import { getData } from "./emma.ts";
+import { getData, propsToResponse } from "./emma.ts";
 import { getQuery } from "./query.ts";
 import { search } from "./search.ts";
 
@@ -9,5 +9,6 @@ const searchResult = search(
   ["name", "values.name"],
   query,
 );
+const response = propsToResponse(searchResult);
 
-console.log(searchResult);
+console.log(response);

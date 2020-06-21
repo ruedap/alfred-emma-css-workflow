@@ -16,6 +16,7 @@ export const search = (list: TProp[], keys: string[], query: string) => {
   } as const;
 
   const fuse = new Fuse(list, options, undefined);
+  const sr = fuse.search(query) as TSearchResult[];
 
-  return fuse.search(query) as TSearchResult[];
+  return sr.map((v) => v.item) as TProp[];
 };
