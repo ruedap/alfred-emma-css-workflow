@@ -1,12 +1,8 @@
-import { readFileStrSync } from "https://deno.land/std/fs/read_file_str.ts";
-import { parse as yamlParse } from "https://deno.land/std/encoding/yaml.ts";
 import { parse } from "https://deno.land/std/flags/mod.ts";
-
+import { getData } from "./emma.ts";
 import { search } from "./search.ts";
 
-const yml = readFileStrSync("./emma-data.yml");
-const data = yamlParse(yml) as any;
-
+const data = getData();
 const query = parse(Deno.args)._.join(" ");
 const result = search(
   data.rules.props,
