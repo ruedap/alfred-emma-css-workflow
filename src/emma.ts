@@ -1,5 +1,6 @@
 import { readFileStrSync } from "https://deno.land/std/fs/read_file_str.ts";
 import { parse } from "https://deno.land/std/encoding/yaml.ts";
+import { TResponse } from "./alfred/response.ts";
 
 type TVar = Readonly<{
   name: string;
@@ -52,7 +53,7 @@ export const generateAbbr = (propAbbr: string, valueAbbr: string) => {
 };
 
 export const propsToResponse = (props: TProp[]) => {
-  return props.map((prop) => {
+  const res = props.map((prop) => {
     return prop.values.map((value) => {
       const abbr = generateAbbr(prop.abbr, value.abbr);
       return ({
@@ -67,4 +68,10 @@ export const propsToResponse = (props: TProp[]) => {
       });
     });
   }).flat();
+
+  return { items: res } as TResponse;
+};
+
+export const responseToJson = (response: TResponse) => {
+  return JSON.stringify(response);
 };
