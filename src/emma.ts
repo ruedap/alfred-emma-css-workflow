@@ -40,3 +40,31 @@ export const getData = (path: string = "./emma-data.yml") => {
   const yml = readFileStrSync(path);
   return parse(yml) as TEmma;
 };
+
+export const isNumeric = (str: string) => {
+  return !isNaN(parseInt(str));
+};
+
+export const generateAbbr = (propAbbr: string, valueAbbr: string) => {
+  return isNumeric(valueAbbr)
+    ? `${propAbbr}${valueAbbr}`
+    : `${propAbbr}-${valueAbbr}`;
+};
+
+export const propsToResponse = (props: TProp[]) => {
+  return props.map((prop) => {
+    return prop.values.map((value) => {
+      const abbr = generateAbbr(prop.abbr, value.abbr);
+      return ({
+        uid: `${abbr}`,
+        title: `${abbr} { ${prop.name}: ${value.name}; }`,
+        subtitle: `Paste class name: ${abbr}`,
+        arg: `${abbr}`,
+        icon: {
+          type: "fileicon",
+          path: "./icon.png",
+        },
+      });
+    });
+  }).flat();
+};
