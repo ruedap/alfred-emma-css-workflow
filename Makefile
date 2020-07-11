@@ -14,7 +14,7 @@ build:
 clean:
 	rm -rf $(DIST_FILE)
 
-open:
+open: clean build
 	open $(DIST_FILE)
 
 run:
@@ -28,6 +28,8 @@ fmt:
 
 lint:
 	$(DENO) lint --unstable
+	
+f: fmt lint
 
 ci: clean build test
 	$(DENO) run --allow-read ./src/mod.ts font-family fantasy
