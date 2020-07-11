@@ -1,4 +1,4 @@
-# Emma.css Workflow for Alfred [![Build Status](http://img.shields.io/travis/ruedap/alfred-emma-css-workflow.svg?style=flat-square)](https://travis-ci.org/ruedap/alfred-emma-css-workflow)
+# Emma.css Workflow for Alfred
 
 You can incremental search for [Emma.css](https://github.com/ruedap/emma.css) and paste it to front most app.
 
@@ -7,7 +7,7 @@ You can incremental search for [Emma.css](https://github.com/ruedap/emma.css) an
 
 ## Installation
 
-Download **[Emma.alfredworkflow](https://github.com/ruedap/alfred-emma-css-workflow/raw/master/Emma.alfredworkflow)** and import to [Alfred 2](http://www.alfredapp.com/) (require Powerpack).
+Download **[emma.alfredworkflow](https://github.com/ruedap/alfred-emma-css-workflow/raw/master/emma.alfredworkflow)** and import to [Alfred](http://www.alfredapp.com/) (require Powerpack).
 
 
 ## License
