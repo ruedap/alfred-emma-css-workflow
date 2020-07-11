@@ -1,0 +1,38 @@
+name: Release
+on:
+  push:
+    tags:
+      - "*"
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout source codes
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Build
+        run: make
+
+      - name: Create new release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload release asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./emma.alfredworkflow
+          asset_name: emma.alfredworkflow
+          asset_content_type: application/zip
