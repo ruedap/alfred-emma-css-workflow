@@ -11,3 +11,9 @@ Deno.test("search", () => {
   ];
   assertEquals(actual, expected);
 });
+
+Deno.test("search (when query is empty)", () => {
+  const actual = search(sampleList1, ["name", "values.name"], "");
+  const expected = sampleList1;
+  assertEquals(actual, expected);
+});
