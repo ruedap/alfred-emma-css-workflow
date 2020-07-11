@@ -1,7 +1,7 @@
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 import { propsToResponse, TProp, isNumeric, generateAbbr } from "./emma.ts";
 
-export const dummyProps: { [key: string]: TProp } = {
+export const sampleProps: { [key: string]: TProp } = {
   position: {
     name: "position",
     abbr: "pos",
@@ -34,10 +34,10 @@ export const dummyProps: { [key: string]: TProp } = {
   },
 };
 
-export const dummyList1: TProp[] = [
-  dummyProps.position,
-  dummyProps.top,
-  dummyProps.right,
+export const sampleList1: TProp[] = [
+  sampleProps.position,
+  sampleProps.top,
+  sampleProps.right,
 ];
 
 Deno.test("isNumeric", () => {
@@ -54,7 +54,7 @@ Deno.test("generateAbbr", () => {
 });
 
 Deno.test("propsToResponse", () => {
-  const actual = propsToResponse([dummyProps.top, dummyProps.right]);
+  const actual = propsToResponse([sampleProps.top, sampleProps.right]);
   const expected = {
     items: [
       {

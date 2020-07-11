@@ -1,13 +1,13 @@
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 import { search } from "./search.ts";
-import { dummyList1 } from "./emma.test.ts";
+import { sampleList1 } from "./emma.test.ts";
 
 Deno.test("search", () => {
-  const actual = search(dummyList1, ["name", "values.name"], "auto");
+  const actual = search(sampleList1, ["name", "values.name"], "auto");
   const expected = [
-    dummyList1[1],
-    dummyList1[2],
-    dummyList1[0],
+    sampleList1[1],
+    sampleList1[2],
+    sampleList1[0],
   ];
   assertEquals(actual, expected);
 });
