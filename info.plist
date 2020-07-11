@@ -2,15 +2,31 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>name</key>
+	<string>Emma.css 0.15.0.0</string>
+	<key>version</key>
+	<string>0.15.0.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/ruedap/alfred-emma-css-workflow</string>
+	<key>readme</key>
+	<string>https://github.com/ruedap/alfred-emma-css-workflow</string>
 	<key>bundleid</key>
-	<string>com.ruedap.emma-css</string>
+	<string>com.ruedap.alfredworkflow.emma</string>
+	<key>createdby</key>
+	<string>@ruedap</string>
+	<key>description</key>
+	<string>Search through Emma.css</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>disabled</key>
+	<false/>
 	<key>connections</key>
 	<dict>
-		<key>21557827-8003-42B7-A042-16D4C9278FEC</key>
+		<key>51EE5983-5463-4F68-A082-881B120EA327</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8CBC1CA3-D946-4766-9551-505842A4BE52</string>
+				<string>74C3DB3E-637D-4D91-99EA-6D3391970365</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -20,65 +36,8 @@
 			</dict>
 		</array>
 	</dict>
-	<key>createdby</key>
-	<string>@ruedap</string>
-	<key>description</key>
-	<string>Search through Emma.css</string>
-	<key>disabled</key>
-	<false/>
-	<key>name</key>
-	<string>Emma.css 0.10.0.deno</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>62</integer>
-				<key>keyword</key>
-				<string>emma</string>
-				<key>queuedelaycustom</key>
-				<integer>1</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>...</string>
-				<key>script</key>
-				<string>./deno run --allow-read ./src/mod.ts {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Emma.css Workflow</string>
-				<key>title</key>
-				<string>Search through Emma.css</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>21557827-8003-42B7-A042-16D4C9278FEC</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -92,31 +51,78 @@
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>8CBC1CA3-D946-4766-9551-505842A4BE52</string>
+			<string>74C3DB3E-637D-4D91-99EA-6D3391970365</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>emma</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>./deno run --allow-read ./src/mod.ts {query}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search through Emma.css</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>51EE5983-5463-4F68-A082-881B120EA327</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
 	</array>
-	<key>readme</key>
-	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>21557827-8003-42B7-A042-16D4C9278FEC</key>
+		<key>51EE5983-5463-4F68-A082-881B120EA327</key>
 		<dict>
 			<key>xpos</key>
-			<integer>150</integer>
+			<integer>140</integer>
 			<key>ypos</key>
-			<integer>130</integer>
+			<integer>215</integer>
 		</dict>
-		<key>8CBC1CA3-D946-4766-9551-505842A4BE52</key>
+		<key>74C3DB3E-637D-4D91-99EA-6D3391970365</key>
 		<dict>
 			<key>xpos</key>
-			<integer>600</integer>
+			<integer>475</integer>
 			<key>ypos</key>
-			<integer>130</integer>
+			<integer>215</integer>
 		</dict>
 	</dict>
-	<key>webaddress</key>
-	<string></string>
+	<key>variablesdontexport</key>
+	<array/>
 </dict>
 </plist>
