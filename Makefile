@@ -14,6 +14,9 @@ $(DIST_FILE):
 clean:
 	rm -rf $(DIST_FILE)
 
+open:
+	open $(DIST_FILE)
+
 run:
 	$(DENO) run --allow-read ./src/mod.ts $(args)
 
