@@ -1,0 +1,17 @@
+name: Push
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run
+        run: make run args="font-family"
+
+      - name: Test
+        run: make test
+
+      - name: Build
+        run: make build

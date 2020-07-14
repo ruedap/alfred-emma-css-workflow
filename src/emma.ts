@@ -37,7 +37,7 @@ export type TEmma = Readonly<{
   };
 }>;
 
-export const getData = (path: string = "./emma-data.yml") => {
+export const getData = (path = "./emma-data.yml") => {
   const yml = readFileStrSync(path);
   return parse(yml) as TEmma;
 };

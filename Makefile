@@ -1,20 +1,20 @@
 DENO = ./deno
-DIST_FILE=emma.alfredworkflow
+DIST_FILE=Emma.alfredworkflow
 EXEC_BIN=$(DENO)
 EXEC_SRC=./src
 PLIST_FILE=./info.plist
 ICON_FILE=./icon.png
 DATA_FILE=./emma-data.yml
 
-all: clean $(DIST_FILE)
+all: clean build
 
-$(DIST_FILE):
+build:
 	zip -r $(DIST_FILE) $(EXEC_BIN) $(EXEC_SRC) $(PLIST_FILE) $(ICON_FILE) $(DATA_FILE) 
 
 clean:
 	rm -rf $(DIST_FILE)
 
-open:
+open: clean build
 	open $(DIST_FILE)
 
 run:
@@ -28,3 +28,5 @@ fmt:
 
 lint:
 	$(DENO) lint --unstable
+	
+f: fmt lint
