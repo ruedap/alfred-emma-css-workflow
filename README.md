@@ -7,7 +7,7 @@ You can incremental search for [Emma.css](https://github.com/ruedap/emma.css) an
 
 ## Installation
 
-Download **[Emma.alfredworkflow](/releases)** and import to [Alfred](http://www.alfredapp.com/) (require Powerpack).
+Download **[Emma.alfredworkflow](https://github.com/ruedap/alfred-emma-css-workflow/releases)** and import to [Alfred](http://www.alfredapp.com/) (require Powerpack).
 
 
 ## License
