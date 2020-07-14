@@ -7,11 +7,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build
-        run: make build
+      - name: Run
+        run: make run args="font-family"
 
       - name: Test
         run: make test
 
-      - name: Run
-        run: make run args="font-family"
+      - name: Build
+        run: make build
