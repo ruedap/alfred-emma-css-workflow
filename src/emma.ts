@@ -1,4 +1,3 @@
-import { readFileStrSync } from "https://deno.land/std/fs/read_file_str.ts";
 import { parse } from "https://deno.land/std/encoding/yaml.ts";
 import { TResponse } from "./alfred/response.ts";
 
@@ -38,7 +37,7 @@ export type TEmma = Readonly<{
 }>;
 
 export const getData = (path = "./emma-data.yml") => {
-  const yml = readFileStrSync(path);
+  const yml = Deno.readTextFileSync(path);
   return parse(yml) as TEmma;
 };
 
