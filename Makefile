@@ -29,4 +29,4 @@ fmt:
 lint:
 	$(DENO) lint --unstable
 	
-f: fmt lint
+check: fmt lint
