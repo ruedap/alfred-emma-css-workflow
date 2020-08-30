@@ -3,3 +3,4 @@ fix: fix/*
 docs: docs/*
 dependencies: ['dependencies/*', 'deps/*']
 chore: chore/*
+skip-changelog: release/*
