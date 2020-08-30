@@ -12,4 +12,9 @@ const searchResult = search(
 const response = propsToResponse(searchResult);
 const json = responseToJson(response);
 
-console.log(json);
+
+const outputToAlfred = (json: string): void => {
+  Deno.stdout.write(json);
+};
+
+outputToAlfred(json);
