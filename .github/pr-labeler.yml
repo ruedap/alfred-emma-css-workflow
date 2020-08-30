@@ -1,0 +1,5 @@
+feature: feature/*
+fix: fix/*
+docs: docs/*
+chore: chore/*
+fixed-branch: fixed-branch-name
