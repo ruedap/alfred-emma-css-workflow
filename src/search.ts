@@ -9,7 +9,7 @@ type TSearchResult = Readonly<{
 }>;
 
 export const search = (list: TProp[], keys: string[], query: string) => {
-  if (!query) return list
+  if (!query) return list;
 
   const options = {
     includeScore: true,

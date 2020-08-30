@@ -58,28 +58,24 @@ Deno.test("propsToResponse", () => {
   const expected = {
     items: [
       {
-        uid: "t-a",
         title: "t-a { top: auto; }",
         subtitle: "Paste class name: t-a",
         arg: "t-a",
         icon: { type: "fileicon", path: "./icon.png" },
       },
       {
-        uid: "t0",
         title: "t0 { top: 0; }",
         subtitle: "Paste class name: t0",
         arg: "t0",
         icon: { type: "fileicon", path: "./icon.png" },
       },
       {
-        uid: "r-a",
         title: "r-a { right: auto; }",
         subtitle: "Paste class name: r-a",
         arg: "r-a",
         icon: { type: "fileicon", path: "./icon.png" },
       },
       {
-        uid: "r0",
         title: "r0 { right: 0; }",
         subtitle: "Paste class name: r0",
         arg: "r0",

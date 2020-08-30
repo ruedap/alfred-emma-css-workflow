@@ -56,7 +56,6 @@ export const propsToResponse = (props: TProp[]) => {
     return prop.values.map((value) => {
       const abbr = generateAbbr(prop.abbr, value.abbr);
       return ({
-        uid: `${abbr}`,
         title: `${abbr} { ${prop.name}: ${value.name}; }`,
         subtitle: `Paste class name: ${abbr}`,
         arg: `${abbr}`,
