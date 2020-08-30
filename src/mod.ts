@@ -14,7 +14,7 @@ const json = responseToJson(response);
 
 
 const outputToAlfred = (json: string): void => {
-  Deno.stdout.write(json);
+  console.log(json);
 };
 
 outputToAlfred(json);
