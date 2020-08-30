@@ -1,5 +1,5 @@
 feature: ['feature/*', 'feat/*']
 fix: fix/*
 docs: docs/*
-deps: ['dependencies/*', 'deps/*']
+dependencies: ['dependencies/*', 'deps/*']
 chore: chore/*
