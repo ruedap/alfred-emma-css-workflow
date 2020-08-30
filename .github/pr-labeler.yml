@@ -1,4 +1,4 @@
-feature: feature/*
+feature: ['feature/*', 'feat/*']
 fix: fix/*
 docs: docs/*
 chore: chore/*
