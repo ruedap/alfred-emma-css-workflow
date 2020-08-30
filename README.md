@@ -12,7 +12,7 @@ Download **[Emma.alfredworkflow](https://github.com/ruedap/alfred-emma-css-workf
 
 ## License
 
-Released under the [MIT license](http://ruedap.mit-license.org/2015).
+Released under the [MIT license](https://github.com/ruedap/alfred-emma-css-workflow/blob/master/LICENSE.md).
 
 
 ## Author
