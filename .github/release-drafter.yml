@@ -20,7 +20,7 @@ categories:
       - 'dependencies'
   - title: '🧰 Maintenance'
     label: 'chore'
-change-template: '- #$NUMBER: $TITLE'
+change-template: "- $TITLE (#$NUMBER) @$AUTHOR"
 template: |
   ## Changes
   $CHANGES
