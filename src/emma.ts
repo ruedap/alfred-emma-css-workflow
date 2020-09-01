@@ -11,10 +11,11 @@ export type TProp = Readonly<{
   abbr: string;
   group: string;
   values: {
-    name: string;
-    abbr: string;
+    name:string;
+    abbr:  string;
   }[];
 }>;
+
 
 type TMixin = Readonly<{
   name: string;
