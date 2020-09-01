@@ -13,11 +13,10 @@ jobs:
   labeler:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: crazy-max/ghaction-github-labeler@v3
+      - uses: actions/checkout@v2
+      - uses: crazy-max/ghaction-github-labeler@v3.0.0
         with:
-          yaml_file: '.github/sync-labels.yml'
-          skip_delete: true # 定義ファイルに記載の無いラベルの削除を行わない
-          dry_run: false # 実際に反映する。trueの場合は、結果のみ表示で反映しない。
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          yaml-file: '.github/sync-labels.yml'
+          skip-delete: true
+          dry-run: false
