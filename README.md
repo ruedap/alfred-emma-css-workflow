@@ -4,16 +4,13 @@ You can incremental search for [Emma.css](https://github.com/ruedap/emma.css) an
 
 ![](http://ruedap.github.io/alfred-emma-css-workflow/assets/cap.png)
 
-
 ## Installation
 
 Download **[Emma.alfredworkflow](https://github.com/ruedap/alfred-emma-css-workflow/releases)** and import to [Alfred](http://www.alfredapp.com/) (require Powerpack).
 
-
 ## License
 
 Released under the [MIT license](https://github.com/ruedap/alfred-emma-css-workflow/blob/master/LICENSE.md).
-
 
 ## Author
 
