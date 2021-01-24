@@ -4,10 +4,17 @@ on: [push]
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-16.04
     steps:
       - uses: actions/checkout@v2
-
+      - uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.7
+      - run: |
+          deno --version
+          deno run https://deno.land/std/examples/welcome.ts
+          deno install --allow-read -n deno_cat https://deno.land/std/examples/cat.ts
+          deno_cat ./README.md
       - name: Run
         run: make run args="font-family"
 
@@ -15,4 +22,4 @@ jobs:
         run: make test
 
       - name: Build
-        run: make build
+        run: make
