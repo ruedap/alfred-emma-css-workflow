@@ -14,12 +14,12 @@ build:
 	zip -r $(DIST_FILE) $(BIN_FILE) $(PLIST_FILE) $(ICON_FILE) $(DATA_FILE)
 
 compile:
-	$(DENO) compile --unstable --lite --allow-read --output ${BIN_FILE} ${ENTRY_FILE}
+	$(DENO) compile --unstable --lite --allow-read --target x86_64-apple-darwin --output ${BIN_FILE} ${ENTRY_FILE}
 
 clean:
 	rm -rf $(DIST_FILE)
 
-open: clean build
+open:
 	open $(DIST_FILE)
 
 run:
