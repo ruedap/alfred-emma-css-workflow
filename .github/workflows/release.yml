@@ -8,6 +8,12 @@ jobs:
   release:
     runs-on: macos-latest
     steps:
+      - uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.7
+      - run: |
+          deno --version
+          
       - name: Checkout source codes
         uses: actions/checkout@v2
         with:
