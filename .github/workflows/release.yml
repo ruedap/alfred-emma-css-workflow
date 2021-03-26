@@ -11,16 +11,21 @@ jobs:
       - uses: denolib/setup-deno@v2
         with:
           deno-version: v1.7
-      - run: |
+      - run: deno --version
+
+      - name: Install denon
+        run: |
           deno --version
-          
+          deno install -qAf --unstable https://deno.land/x/denon/denon.ts
+          denon --version
+
       - name: Checkout source codes
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
 
       - name: Build
-        run: make
+        run: denon make
 
       - name: Create new release
         id: create-release

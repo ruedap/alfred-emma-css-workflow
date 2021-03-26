@@ -9,17 +9,20 @@ jobs:
       - uses: actions/checkout@v2
       - uses: denolib/setup-deno@v2
         with:
-          deno-version: v1.7
-      - run: |
+          deno-version: v1.8
+      - run: deno --version
+
+      - name: Install denon
+        run: |
           deno --version
-          deno run https://deno.land/std/examples/welcome.ts
-          deno install --allow-read -n deno_cat https://deno.land/std/examples/cat.ts
-          deno_cat ./README.md
+          deno install -qAf --unstable https://deno.land/x/denon/denon.ts
+          denon --version
+
       - name: Run
-        run: make run args="font-family"
+        run: denon run font-family
 
       - name: Test
-        run: make test
+        run: denon test
 
       - name: Build
-        run: make
+        run: denon make
