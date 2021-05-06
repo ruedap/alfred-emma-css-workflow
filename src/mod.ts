@@ -12,7 +12,6 @@ const searchResult = search(
 const response = propsToResponse(searchResult);
 const json = responseToJson(response);
 
-
 const outputToAlfred = (json: string): void => {
   console.log(json);
 };

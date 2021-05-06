@@ -1,25 +1,27 @@
 name: Push
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: denolib/setup-deno@v2
         with:
-          deno-version: v1.8
+          deno-version: v1.9
       - run: deno --version
 
       - name: Install denon
         run: |
-          deno --version
           deno install -qAf --unstable https://deno.land/x/denon/denon.ts
           denon --version
 
       - name: Run
         run: denon run font-family
+
+      # - name: Check
+      #   run: denon check
 
       - name: Test
         run: denon test

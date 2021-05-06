@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
-import { propsToResponse, TProp, isNumeric, generateAbbr } from "./emma.ts";
+import { generateAbbr, isNumeric, propsToResponse, TProp } from "./emma.ts";
 
 export const sampleProps: { [key: string]: TProp } = {
   position: {
