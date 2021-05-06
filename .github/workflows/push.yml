@@ -13,10 +13,9 @@ jobs:
       - run: deno --version
 
       - name: Install denon
-        run: deno install -qAf --unstable https://deno.land/x/denon/denon.ts
-
-      - name: Run denon
-        run: denon --version
+        run: |
+          deno install -qAf --unstable https://deno.land/x/denon/denon.ts
+          denon --version
 
       - name: Run
         run: denon run font-family
