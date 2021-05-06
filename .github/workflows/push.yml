@@ -14,8 +14,7 @@ jobs:
       - run: deno --version
 
       - name: Install denon
-        run: |
-          deno --version
+      - run: |
           deno install -qAf --unstable https://deno.land/x/denon/denon.ts
           denon --version
 
