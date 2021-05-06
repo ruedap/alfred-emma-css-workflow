@@ -30,7 +30,7 @@ const SCRIPTS = {
     cmd: `${DENO} test`,
   },
   fmt: {
-    cmd: `${DENO} fmt`,
+    cmd: `${DENO} fmt --check`,
   },
   lint: {
     cmd: `${DENO} lint --unstable`,

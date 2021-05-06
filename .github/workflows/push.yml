@@ -4,12 +4,13 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: denolib/setup-deno@v2
+      - uses: denoland/setup-deno@main
         with:
-          deno-version: v1.8
+          deno-version: "1.9.2"
+
       - run: deno --version
 
       - name: Install denon
@@ -20,6 +21,9 @@ jobs:
 
       - name: Run
         run: denon run font-family
+
+      # - name: Check
+      #   run: denon check
 
       - name: Test
         run: denon test
